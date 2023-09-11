@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio" color="secondary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Clase Registrada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-item *ngFor="let dato of datosGuardados">
+        {{ datos.rawValue }}
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content>
+      Nombre: {{ loggedInUser.username }}
+    </ion-card-content>
+    <ion-card-content>
+    Rut: {{ loggedInUser.rut }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

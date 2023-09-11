@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio" color="secondary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <br>
+  <ion-item>
+    <ion-label position="stacked">Nombre de usuario</ion-label>
+    <ion-input type="text" placeholder="Ingrese su nombre de usuario" [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Contraseña</ion-label>
+    <ion-input type="password" placeholder="Ingrese su contraseña" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">RUT</ion-label>
+    <ion-input type="number" placeholder="Ingrese su RUT" [(ngModel)]="rut"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button expand="full" (click)="register()" shape="round" color="secondary">Registrarse</ion-button>
+</ion-content>

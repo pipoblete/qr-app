@@ -1,0 +1,27 @@
+ion-header{
+    ion-toolbar{
+        --background: rgb(196, 119, 74);
+        ion-title{
+            text-align: center;
+        }
+    }
+}
+
+ion-content{
+    
+    --background: rgb(196, 119, 74);
+    ion-card{
+        animation: animacion2 2s ease-out;
+        margin-top: 50%;
+        --background: rgb(70, 204, 228);
+        font-size: 15px;
+        color: white;
+        
+    }
+}
+
+@keyframes animacion2 {
+    0% {
+      transform: translateX(-80%);
+    }
+  }

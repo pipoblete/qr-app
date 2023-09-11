@@ -1,0 +1,24 @@
+ion-header{
+    ion-toolbar{
+        --background: rgb(196, 119, 74);
+        
+    }
+}
+ion-content{
+    --background: rgb(196, 119, 74);
+    ion-item{
+        --background: rgb(196, 119, 74);
+        font-size: 15px;
+        ion-label{
+            font-size: 20px;
+        }
+    }
+    a{
+        color: white;
+        text-align: center;
+        margin-left: 22.5%;
+    }
+    ion-button{
+        font-size: 20px;
+    }
+}

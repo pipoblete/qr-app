@@ -1,0 +1,29 @@
+ion-content{
+    --background: rgb(196, 119, 74);
+    ion-button{
+        animation: animacion1 2s ease-out;
+        display: block;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20%;
+        width: 80%;
+    }
+    p{
+        animation: animacion1 1s ease-out;
+        text-align: center;
+        font-size: 30px;
+    }
+}
+
+@keyframes animacion1 {
+    0% {
+      transform: translateX(-25%);
+    }
+  }
+
