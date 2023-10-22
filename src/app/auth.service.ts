@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
@@ -7,21 +8,28 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isAuthenticated: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storage: Storage) {
+    this.initStorage();
+  }
 
-  // Método para iniciar sesión
-  login() {
+  async initStorage() {
+    await this.storage.create();
+    const authenticated = await this.storage.get('authenticated');
+    this.isAuthenticated = authenticated === true;
+  }
+
+  async login() {
     this.isAuthenticated = true;
+    await this.storage.set('authenticated', true);
   }
 
-  // Método para cerrar sesión
-  logout() {
+  async logout() {
     this.isAuthenticated = false;
-    this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión
+    await this.storage.set('authenticated', false);
+    this.router.navigate(['/login']);
   }
 
-  // Verifica si el usuario ha iniciado sesión
-  isAuthenticatedUser() {
+  async isAuthenticatedUser(): Promise<boolean> {
     return this.isAuthenticated;
   }
 }

@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { BrowserMultiFormatReader, Result } from '@zxing/library';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ export class HomePage implements OnInit {
   isScanning = false;
   scannedResult: string | null = null;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private storage: Storage) {
     this.codeReader = new BrowserMultiFormatReader();
   }
 
@@ -33,12 +35,15 @@ export class HomePage implements OnInit {
       if (this.video && this.video.nativeElement) {
         this.video.nativeElement.srcObject = stream;
         this.codeReader.decodeFromInputVideoDevice(undefined, this.video.nativeElement)
-        .then((result: Result) => {
-          console.log('Escaneo exitoso:', result.getText());
-          this.scannedResult = result.getText();
-          this.router.navigate(['/mostrar', { resultado: this.scannedResult }]);
-          
-        });
+          .then(async (result: Result) => {
+            console.log('Escaneo exitoso:', result.getText());
+            this.scannedResult = result.getText();
+            
+            // Utiliza Ionic Storage para guardar los datos escaneados
+            await this.storage.set('datosEscaneados', this.scannedResult);
+            
+            this.router.navigate(['/mostrar', { resultado: this.scannedResult }]);
+          });
       } else {
         console.error('Elemento de video no encontrado.');
       }
@@ -47,15 +52,5 @@ export class HomePage implements OnInit {
       this.isScanning = false;
     }
   }
-
-  stopScanning() {
-    this.codeReader.reset();
-    this.scannedResult = '';
-  }
-
-  guardarDatosEscaneados(data: string): void {
-    if (data) {
-      localStorage.setItem('datosEscaneados', data);
-    }
-  }
+  
 }

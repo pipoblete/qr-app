@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from "../auth.service";
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-login',
@@ -12,23 +15,27 @@ export class LoginPage {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router, private alertController: AlertController) {}
+  constructor(private router: Router, private alertController: AlertController, private authService: AuthService,  private storage: Storage) {}
 
   registro() {
     this.router.navigate(['/register']);
   }
 
   async login() {
-
-    const storedUsersStr = localStorage.getItem('users');
-
+    const storedUsersStr = await this.storage.get('users');
+  
     if (storedUsersStr) {
       const storedUsers = JSON.parse(storedUsersStr);
-
+  
       const user = storedUsers.find((u: any) => u.username === this.username && u.password === this.password);
-
+  
       if (user) {
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
+        console.log('Usuario autenticado y almacenado en Ionic Storage:', user);
+        this.authService.login();
+        
+        
+        await this.storage.set('loggedInUser', JSON.stringify(user));
+        
         this.router.navigate(['/home']);
         const alert = await this.alertController.create({
           header: 'Inicio de sesión exitoso',
@@ -53,4 +60,4 @@ export class LoginPage {
       await alert.present();
     }
   }
-}
+}  

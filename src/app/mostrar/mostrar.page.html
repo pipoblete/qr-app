@@ -19,9 +19,11 @@
       Datos alumno:
     </ion-card-content>
     <ion-card-content>
-      Nombre: {{ loggedInUser.username }},
-      Rut: {{ loggedInUser.rut }}
+      <ng-container *ngIf="loggedInUser">
+        Nombre: {{ loggedInUser.username }}, Rut: {{ loggedInUser.rut }}
+      </ng-container>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
 

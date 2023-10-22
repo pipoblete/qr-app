@@ -23,6 +23,16 @@
     <ion-label position="stacked">RUT</ion-label>
     <ion-input type="number" placeholder="Ingrese su RUT" [(ngModel)]="rut"></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Región</ion-label>
+    <ion-select [(ngModel)]="region">
+      <ion-select-option *ngFor="let reg of regiones" [value]="reg.id">{{ reg.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
   <br>
   <ion-button expand="full" (click)="register()" shape="round" color="secondary">Registrarse</ion-button>
+
 </ion-content>
+
