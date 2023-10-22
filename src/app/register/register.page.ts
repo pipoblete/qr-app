@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { RegionService } from '../region.service';
 import { Storage } from '@ionic/storage'; 
+import { ComunaService } from '../comuna.service';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-register',
@@ -16,16 +18,22 @@ export class RegisterPage implements OnInit {
   rut: string = '';
   regiones: { id: number; nombre: string }[] = [];
   region: number = 0;
+  comuna: number = 0;
+  comunas: { id: number; nombre: string }[] = [];
+  latitude: number = 0; 
+  longitude: number = 0;
 
   constructor(
     private router: Router,
     private alertController: AlertController,
     private regionService: RegionService,
-    private storage: Storage
+    private storage: Storage,
+    private comunaService: ComunaService
   ) {}
 
   ngOnInit() {
     this.obtenerRegiones();
+    this.obtenerComunas();
   }
 
   async obtenerRegiones() {
@@ -39,6 +47,20 @@ export class RegisterPage implements OnInit {
     );
   }
 
+  async obtenerComunas() {
+    if (this.region) {
+      console.log(this.region);
+      this.comunaService.obtenerComunas(this.region).subscribe(
+        (data) => {
+          this.comunas = data.data;
+        },
+        (error) => {
+          console.error('Error al obtener las comunas: ', error);
+        }
+      );
+    }
+   }
+
   async register() {
     if (!this.username.trim() || !this.password.trim()) {
       const alert = await this.alertController.create({
@@ -50,6 +72,10 @@ export class RegisterPage implements OnInit {
       await alert.present();
       return;
     }
+
+    const coordinates = await Geolocation.getCurrentPosition();
+    this.latitude = coordinates.coords.latitude;
+    this.longitude = coordinates.coords.longitude;
 
     let existingUsers: any[] = [];
     try {
@@ -77,6 +103,8 @@ export class RegisterPage implements OnInit {
         password: this.password,
         rut: this.rut,
         isAuthenticated: true,
+        latitude: this.latitude,
+        longitude: this.longitude,
       };
 
       existingUsers.push(newUser);

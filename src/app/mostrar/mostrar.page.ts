@@ -40,5 +40,10 @@ export class MostrarPage implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  cerrarSesion() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
   
 }

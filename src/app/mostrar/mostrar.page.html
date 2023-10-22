@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio" color="secondary"></ion-back-button>
+      <ion-back-button defaultHref="/home" color="light"></ion-back-button>
     </ion-buttons>
     <ion-title>Clase Registrada</ion-title>
   </ion-toolbar>
@@ -10,20 +10,24 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      Datos clase:
-    </ion-card-content>
-    <ion-card-content>
+      <p>Datos clase:</p>
       {{ datosEscaneados }}
     </ion-card-content>
+  </ion-card>
+  <ion-card>
     <ion-card-content>
       Datos alumno:
-    </ion-card-content>
-    <ion-card-content>
       <ng-container *ngIf="loggedInUser">
-        Nombre: {{ loggedInUser.username }}, Rut: {{ loggedInUser.rut }}
+        <p>Nombre: {{ loggedInUser.username }}</p>
+        <p>Rut: {{ loggedInUser.rut }}</p>
+        <p>Latitud: {{loggedInUser.latitude}}</p>
+        <p>Longitud: {{loggedInUser.longitude}}</p>
       </ng-container>
     </ion-card-content>
   </ion-card>
+  <ion-button expand="full" (click)="cerrarSesion()" shape="round" color="secondary">Cerrar Sesión</ion-button>
 </ion-content>
+
+ 
 
 
