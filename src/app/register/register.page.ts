@@ -1,19 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { RegionService } from '../region.service';
+import { Storage } from '@ionic/storage'; 
 
 @Component({
   selector: 'app-register',
   templateUrl: 'register.page.html',
   styleUrls: ['register.page.scss'],
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
 
   username: string = '';
   password: string = '';
   rut: string = '';
+  regiones: { id: number; nombre: string }[] = [];
+  region: number = 0;
 
-  constructor(private router: Router, private alertController: AlertController) {}
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private regionService: RegionService,
+    private storage: Storage
+  ) {}
+
+  ngOnInit() {
+    this.obtenerRegiones();
+  }
+
+  async obtenerRegiones() {
+    this.regionService.obtenerRegiones().subscribe(
+      (data) => {
+        this.regiones = data.data;
+      },
+      (error) => {
+        console.error('Error al obtener las regiones: ', error);
+      }
+    );
+  }
 
   async register() {
     if (!this.username.trim() || !this.password.trim()) {
@@ -24,11 +48,18 @@ export class RegisterPage {
       });
 
       await alert.present();
-      return; 
+      return;
     }
 
-    const existingUsersStr = localStorage.getItem('users');
-    let existingUsers = existingUsersStr ? JSON.parse(existingUsersStr) : [];
+    let existingUsers: any[] = [];
+    try {
+      const existingUsersStr = await this.storage.get('users');
+      if (existingUsersStr) {
+        existingUsers = JSON.parse(existingUsersStr);
+      }
+    } catch (error) {
+      console.error('Error al obtener usuarios del almacenamiento:', error);
+    }
 
     const usernameExists = existingUsers.some((user: any) => user.username === this.username);
 
@@ -44,12 +75,17 @@ export class RegisterPage {
       const newUser = {
         username: this.username,
         password: this.password,
-        rut: this.rut
+        rut: this.rut,
+        isAuthenticated: true,
       };
 
       existingUsers.push(newUser);
 
-      localStorage.setItem('users', JSON.stringify(existingUsers));
+      try {
+        await this.storage.set('users', JSON.stringify(existingUsers));
+      } catch (error) {
+        console.error('Error al guardar usuarios en el almacenamiento:', error);
+      }
 
       const alert = await this.alertController.create({
         header: 'Registro exitoso',
