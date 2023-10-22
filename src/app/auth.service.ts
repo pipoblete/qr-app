@@ -26,6 +26,7 @@ export class AuthService {
   async logout() {
     this.isAuthenticated = false;
     await this.storage.set('authenticated', false);
+    await this.storage.remove('loggedInUser');
     this.router.navigate(['/login']);
   }
 
