@@ -1,6 +1,6 @@
 ion-header{
     ion-toolbar{
-        --background: rgb(196, 119, 74);
+        --background: rgb(70, 204, 228);
         ion-title{
             font-size: 20px;
         }
@@ -8,12 +8,19 @@ ion-header{
 }
 
 ion-content{
-    --background: rgb(196, 119, 74);
+    --background: rgb(255, 255, 255);
     ion-item{
-        --background: rgb(196, 119, 74);
+        --background: rgb(255, 255, 255);
         font-size: 15px;
         ion-label{
             font-size: 20px;
+            color: black;
+        }
+        ion-input{
+            color: black;
+        }
+        ion-select{
+            color: black;
         }
     }
     a{
