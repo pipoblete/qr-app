@@ -16,6 +16,16 @@ ion-content{
         --background: rgb(70, 204, 228);
         font-size: 15px;
         color: white;
+
+        ion-card-content{
+            font-size: 20px;
+        }
+
+        ion-item{
+            --background: rgb(70, 204, 228);
+            color: white;
+            font-size: 20px;
+        }
         
     }
 }

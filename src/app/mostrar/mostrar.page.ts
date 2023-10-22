@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Barcode } from '@capacitor-mlkit/barcode-scanning';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mostrar',
@@ -9,24 +10,31 @@ import { Barcode } from '@capacitor-mlkit/barcode-scanning';
 })
 export class MostrarPage implements OnInit {
 
-    datosGuardados: Barcode[] = []; 
+    datosEscaneados: string = ''; 
     loggedInUser: any;
     rutUser: any;
   
-    constructor() {}
+    constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) {}
   
     ngOnInit() {
 
+      if (!this.authService.isAuthenticatedUser()) {
+       
+        this.router.navigate(['/login']);
+        return;
+      }
+
       const loggedInUserStr = localStorage.getItem('loggedInUser');
-      
-      const datosEscaneadosJSON = localStorage.getItem('datosEscaneados');
 
       if (loggedInUserStr) {
         this.loggedInUser = JSON.parse(loggedInUserStr);
       }
   
-      if (datosEscaneadosJSON) {
-        this.datosGuardados = JSON.parse(datosEscaneadosJSON);
-      }
+      this.route.paramMap.subscribe(params => {
+        const resultado = params.get('resultado');
+        if (resultado !== null) {
+          this.datosEscaneados = resultado;
+        }
+      });
     }
-  }
+  };

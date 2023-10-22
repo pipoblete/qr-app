@@ -10,15 +10,18 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-item *ngFor="let dato of datosGuardados">
-        {{ dato.rawValue }}
-      </ion-item>
+      Datos clase:
     </ion-card-content>
     <ion-card-content>
-      Nombre: {{ loggedInUser.username }}
+      {{ datosEscaneados }}
     </ion-card-content>
     <ion-card-content>
-    Rut: {{ loggedInUser.rut }}
+      Datos alumno:
+    </ion-card-content>
+    <ion-card-content>
+      Nombre: {{ loggedInUser.username }},
+      Rut: {{ loggedInUser.rut }}
     </ion-card-content>
   </ion-card>
 </ion-content>
+

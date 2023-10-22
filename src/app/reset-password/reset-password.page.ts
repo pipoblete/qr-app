@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,21 +12,23 @@ export class ResetPasswordPage {
   newPassword: string = ''; 
 
   constructor(
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
 
   async changePassword() {
     
-    const storedUserStr = localStorage.getItem('user');
+    const storedUserStr = localStorage.getItem('users');
 
     if (storedUserStr) {
-      const storedUser = JSON.parse(storedUserStr);
+      let storedUser = JSON.parse(storedUserStr);
+      const userToChange = storedUser.find((user: any) => user.username === this.username);
 
-      if (storedUser.username === this.username) {
-        storedUser.password = this.newPassword;
+      if (userToChange) {
+        userToChange.password = this.newPassword;
 
-        localStorage.setItem('user', JSON.stringify(storedUser));
+        localStorage.setItem('users', JSON.stringify(storedUser));
 
         const alert = await this.alertController.create({
           header: 'Contraseña Cambiada',
@@ -34,6 +37,9 @@ export class ResetPasswordPage {
         });
 
         await alert.present();
+
+        this.router.navigate(['/login']);
+
 
       } else {
         const alert = await this.alertController.create({

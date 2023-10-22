@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MostrarPageRoutingModule } from './mostrar-routing.module';
 
 import { MostrarPage } from './mostrar.page';
+import { AuthService } from '../auth.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MostrarPage } from './mostrar.page';
     IonicModule,
     MostrarPageRoutingModule
   ],
-  declarations: [MostrarPage]
+  declarations: [MostrarPage],
+  providers: [AuthService]
 })
 export class MostrarPageModule {}
