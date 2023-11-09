@@ -42,6 +42,7 @@ export class MostrarPage implements OnInit {
   }
 
   cerrarSesion() {
+    console.log('Cerrando sesión...');
     this.authService.logout();
     this.router.navigate(['/login']);
   }

@@ -17,10 +17,6 @@ export class LoginPage {
 
   constructor(private router: Router, private alertController: AlertController, private authService: AuthService,  private storage: Storage) {}
 
-  registro() {
-    this.router.navigate(['/register']);
-  }
-
   async login() {
     const storedUsersStr = await this.storage.get('users');
   
