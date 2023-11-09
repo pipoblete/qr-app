@@ -1,20 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Escanear QR</ion-title>
+    <ion-back-button defaultHref="/login"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
   <div>
     <video #video playsinline autoplay></video>
     <canvas #canvas style="display: none;"></canvas>
   </div>
-
-
+  </ion-card>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="startScanning()" [disabled]="isScanning">
+    <ion-fab-button (click)="startScanning()" color="tertiary">
       <ion-icon name="scan"></ion-icon>
     </ion-fab-button>
-    
   </ion-fab>
+  
 </ion-content>

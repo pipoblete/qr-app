@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
@@ -9,6 +9,7 @@
 
 <ion-content class="ion-padding">
   <br>
+  <ion-card>
   <ion-item>
     <ion-label position="stacked">Nombre de usuario</ion-label>
     <ion-input type="text" placeholder="Ingrese su nombre de usuario" [(ngModel)]="username"></ion-input>
@@ -37,9 +38,12 @@
       <ion-select-option *ngFor="let com of comunas" [value]="com.id">{{ com.nombre }}</ion-select-option>
     </ion-select>
   </ion-item>
+  </ion-card>
 
   <br>
-  <ion-button expand="full" (click)="register()" shape="round" color="secondary">Registrarse</ion-button>
+  <ion-button expand="full" (click)="register()" shape="round" color="tertiary">Registrarse</ion-button>
+  <br>
+  <a href="/login">¿Ya tienes una cuenta? Inicia sesión</a>
 
 </ion-content>
 

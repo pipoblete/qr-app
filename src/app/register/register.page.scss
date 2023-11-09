@@ -1,34 +1,52 @@
 ion-header{
     ion-toolbar{
-        --background: rgb(70, 204, 228);
+        --background: rgb(82, 54, 206);
         ion-title{
             font-size: 20px;
+            font-family: 'Florence Sans', sans-serif;
+        }
+        ion-back-button{
+            color: white;
+            font-family: 'Florence Sans', sans-serif;
         }
     }
 }
 
 ion-content{
-    --background: rgb(255, 255, 255);
-    ion-item{
-        --background: rgb(255, 255, 255);
-        font-size: 15px;
+    --background: rgb(161, 160, 224);
+    ion-card{
+        background-color: rgb(82, 54, 206);
+        ion-item{
+            --background:
+            font-size: 15px;
         ion-label{
             font-size: 20px;
-            color: black;
+            color: white;
+            font-family: 'Florence Sans', sans-serif;
         }
         ion-input{
-            color: black;
+            color: white;
+            font-family: 'Florence Sans', sans-serif;
         }
         ion-select{
-            color: black;
+            color: white;
+            font-family: 'Florence Sans', sans-serif;
+        }
         }
     }
     a{
         color: white;
         text-align: center;
-        margin-left: 22.5%;
+        margin-left: 10%;
+        font-family: 'Florence Sans', sans-serif;
     }
     ion-button{
         font-size: 20px;
+        font-family: 'Florence Sans', sans-serif;
     }
+}
+
+@font-face {
+    font-family: 'Florence Sans';
+    src: url('../fonts/14910_Florsn02.ttf')
 }

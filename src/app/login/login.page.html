@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/inicio" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
     <ion-title>
         Iniciar sesión
@@ -9,25 +9,22 @@
   </ion-toolbar>
 </ion-header>
 
-    <ion-content class="ion-padding">
-        <ion-content class="ion-padding">
-          <br>
-          <br>
+    <ion-content>
+        <ion-content>
   
+          <ion-card>
           <ion-item>
             <ion-label position="stacked">Usuario</ion-label>
             <ion-input id="username" type="username" placeholder="Tu nombre de usuario" [(ngModel)]="username"></ion-input>
           </ion-item>
-  
+          <br>
           <ion-item>
             <ion-label position="stacked">Contraseña</ion-label>
             <ion-input id="password" type="password" placeholder="********" [(ngModel)]="password"></ion-input>
           </ion-item>
-          <br>
-          <ion-button expand="full" (click)="login()" shape="round" color="secondary">Iniciar sesión</ion-button>
+        </ion-card>
+        <ion-button expand="full" (click)="login()" shape="round" color="tertiary">Iniciar sesión</ion-button>
           <br>
           <a href="/reset-password">¿Olvidaste tu contraseña?</a>
-          
-
         </ion-content>
     </ion-content>

@@ -25,3 +25,31 @@
 #container a {
   text-decoration: none;
 }
+
+ion-header{
+  --background: rgb(82, 54, 206);
+  ion-toolbar{
+    --background: rgb(82, 54, 206);
+    ion-title{
+      font-size: 20px;
+      font-family: 'Florence Sans', sans-serif;
+    }
+    ion-back-button{
+      color: white;
+      font-family: 'Florence Sans', sans-serif;
+      margin-right: 80%;
+    }
+  }
+}
+
+ion-content{
+  --background: rgb(161, 160, 224);
+    ion-card{
+      margin-top: 25%;
+    }
+}
+
+@font-face {
+  font-family: 'Florence Sans';
+  src: url('../fonts/14910_Florsn02.ttf')
+}
