@@ -34,6 +34,15 @@ const routes: Routes = [
     loadChildren: () => import('./mostrar/mostrar.module').then( m => m.MostrarPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'error',
+    loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'error'
+  },
+
   
 
 
