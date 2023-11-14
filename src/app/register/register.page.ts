@@ -5,6 +5,8 @@ import { RegionService } from '../region.service';
 import { Storage } from '@ionic/storage'; 
 import { ComunaService } from '../comuna.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { Camera, CameraResultType, CameraSource} from '@capacitor/camera';
+import { FilesystemDirectory, Filesystem, Directory } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-register',
@@ -22,6 +24,7 @@ export class RegisterPage implements OnInit {
   comunas: { id: number; nombre: string }[] = [];
   latitude: number = 0; 
   longitude: number = 0;
+  fotoTomada: string | undefined;
 
   constructor(
     private router: Router,
@@ -35,6 +38,28 @@ export class RegisterPage implements OnInit {
     this.obtenerRegiones();
     this.obtenerComunas();
   }
+
+  async tomarFoto() {
+    try {
+      const foto = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera,
+      });
+  
+      if (foto && foto.webPath) {
+        await this.storage.set('foto', foto.webPath);
+        console.log('Foto almacenada en Ionic Storage:', foto.webPath);
+        this.fotoTomada = foto.webPath;
+      } else {
+        console.error('La foto no contiene un webPath válido.');
+      }
+    } catch (error) {
+      console.error('Error al tomar la foto:', error);
+    }
+  }
+  
 
   async obtenerRegiones() {
     this.regionService.obtenerRegiones().subscribe(
@@ -73,9 +98,14 @@ export class RegisterPage implements OnInit {
       return;
     }
 
-    const coordinates = await Geolocation.getCurrentPosition();
+    
+try {
+  const coordinates = await Geolocation.getCurrentPosition();
     this.latitude = coordinates.coords.latitude;
     this.longitude = coordinates.coords.longitude;
+} catch (error) {
+  console.error('Error al obtener la ubicación:', error);
+}
 
     let existingUsers: any[] = [];
     try {
@@ -125,5 +155,8 @@ export class RegisterPage implements OnInit {
 
       this.router.navigate(['/login']);
     }
+    
+
   }
+  
 }

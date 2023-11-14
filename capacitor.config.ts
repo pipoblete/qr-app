@@ -6,6 +6,16 @@ const config: CapacitorConfig = {
   webDir: 'www',
   server: {
     androidScheme: 'https'
+  },
+  plugins: {
+    Camera: {
+      ios: {
+        usesPermission: 'AllowAccessToURL'
+      },
+      android: {
+        iconColor: '#000000'
+      }
+    }
   }
 };
 

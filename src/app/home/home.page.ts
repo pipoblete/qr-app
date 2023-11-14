@@ -28,6 +28,10 @@ export class HomePage implements OnInit {
     }
   }
 
+  mostrar(){
+    this.router.navigate(['/mostrar']);
+  }
+
   async startScanning() {
     try {
       this.isScanning = true;

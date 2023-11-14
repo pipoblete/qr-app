@@ -22,6 +22,7 @@
         <p>Rut: {{ loggedInUser.rut }}</p>
         <p>Latitud: {{loggedInUser.latitude}}</p>
         <p>Longitud: {{loggedInUser.longitude}}</p>
+        <ion-img *ngIf="fotoTomada" [src]="fotoTomada" alt="Foto del alumno"></ion-img>
       </ng-container>
     </ion-card-content>
   </ion-card>

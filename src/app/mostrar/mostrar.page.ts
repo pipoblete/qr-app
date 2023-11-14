@@ -13,6 +13,7 @@ export class MostrarPage implements OnInit {
   datosEscaneados: string = '';
   loggedInUser: any;
   rutUser: any;
+  fotoTomada: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,10 @@ export class MostrarPage implements OnInit {
       console.log('El usuario no está autenticado. Redirigiendo a la página de inicio de sesión.');
       this.router.navigate(['/login']);
     }
+
+    this.fotoTomada = await this.storage.get('foto');
+    console.log('Foto recuperada de Ionic Storage:', this.fotoTomada);
+
   }
 
   cerrarSesion() {
